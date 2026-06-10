@@ -1,0 +1,590 @@
+/* ============================================
+   WEBINAR JAVASCRIPT — E-COMMERCE CHECKOUT
+   Estilos Globais — css/style.css
+   ============================================ */
+
+/* ---------- Reset & Base ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f6fa;
+  color: #2d3436;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ---------- Variáveis de Design ---------- */
+:root {
+  --cor-primaria: #6c5ce7;
+  --cor-primaria-escura: #5a4bd1;
+  --cor-secundaria: #00cec9;
+  --cor-acento: #fd79a8;
+  --cor-sucesso: #00b894;
+  --cor-perigo: #d63031;
+  --cor-alerta: #fdcb6e;
+  --cor-texto: #2d3436;
+  --cor-texto-claro: #636e72;
+  --cor-fundo: #f5f6fa;
+  --cor-fundo-card: #ffffff;
+  --cor-borda: #dfe6e9;
+  --sombra-suave: 0 2px 15px rgba(0, 0, 0, 0.06);
+  --sombra-media: 0 5px 25px rgba(0, 0, 0, 0.1);
+  --sombra-elevada: 0 10px 40px rgba(0, 0, 0, 0.15);
+  --borda-raio: 12px;
+  --borda-raio-sm: 8px;
+  --transicao: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Header ---------- */
+.header {
+  background: linear-gradient(135deg, var(--cor-primaria), var(--cor-primaria-escura));
+  color: #fff;
+  padding: 0 2rem;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
+}
+
+.header__titulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header__titulo::before {
+  content: '🛒';
+  font-size: 1.4rem;
+}
+
+.header__carrinho {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transicao);
+}
+
+.header__carrinho:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.header__carrinho::before {
+  content: '🛍️';
+}
+
+.badge {
+  background: var(--cor-acento);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  padding: 0 6px;
+  animation: badge-pop 0.3s ease;
+}
+
+@keyframes badge-pop {
+  0%   { transform: scale(0.5); }
+  70%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- Layout Principal ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 1280px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* Quando sidebar estiver visível */
+.layout--com-sidebar {
+  grid-template-columns: 1fr 360px;
+}
+
+/* ---------- Vitrine / Área Principal ---------- */
+.vitrine {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.secao-titulo {
+  grid-column: 1 / -1;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--cor-texto);
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--cor-primaria);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ---------- Card de Produto ---------- */
+.card {
+  background: var(--cor-fundo-card);
+  border-radius: var(--borda-raio);
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+  transition: var(--transicao);
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-media);
+}
+
+.card__imagem {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #dfe6e9, #b2bec3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color: #636e72;
+}
+
+.card__imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__corpo {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.card__nome {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cor-texto);
+  line-height: 1.3;
+}
+
+.card__preco {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cor-primaria);
+}
+
+.card__preco-original {
+  font-size: 0.9rem;
+  color: var(--cor-texto-claro);
+  text-decoration: line-through;
+  margin-left: 0.5rem;
+  font-weight: 400;
+}
+
+.card__frete {
+  font-size: 0.85rem;
+  color: var(--cor-texto-claro);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.card__estoque {
+  font-size: 0.85rem;
+  color: var(--cor-texto-claro);
+}
+
+.card__detalhe {
+  border-top: 1px solid var(--cor-borda);
+  padding-top: 0.75rem;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--borda-raio-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transicao);
+  width: 100%;
+}
+
+.btn--primario {
+  background: linear-gradient(135deg, var(--cor-primaria), var(--cor-primaria-escura));
+  color: #fff;
+}
+
+.btn--primario:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(108, 92, 231, 0.4);
+}
+
+.btn--primario:active {
+  transform: translateY(0);
+}
+
+.btn--secundario {
+  background: transparent;
+  color: var(--cor-primaria);
+  border: 2px solid var(--cor-primaria);
+}
+
+.btn--secundario:hover {
+  background: var(--cor-primaria);
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Sidebar / Carrinho ---------- */
+.sidebar {
+  background: var(--cor-fundo-card);
+  border-radius: var(--borda-raio);
+  box-shadow: var(--sombra-suave);
+  padding: 1.5rem;
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+}
+
+.sidebar__titulo {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cor-texto);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--cor-borda);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar__titulo::before {
+  content: '🛒';
+}
+
+.sidebar__lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar__lista li {
+  padding: 0.75rem 1rem;
+  background: var(--cor-fundo);
+  border-radius: var(--borda-raio-sm);
+  font-size: 0.9rem;
+  color: var(--cor-texto);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transicao);
+}
+
+.sidebar__lista li::before {
+  content: '📦';
+  font-size: 0.85rem;
+}
+
+.sidebar__lista li:hover {
+  background: #eee;
+}
+
+.sidebar__vazio {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--cor-texto-claro);
+  font-size: 0.9rem;
+}
+
+.sidebar__vazio::before {
+  content: '🛒';
+  display: block;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.4;
+}
+
+.sidebar__resumo {
+  border-top: 2px solid var(--cor-borda);
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar__linha {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--cor-texto-claro);
+}
+
+.sidebar__total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--cor-texto);
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--cor-borda);
+  margin-top: 0.25rem;
+}
+
+/* ---------- Seção de Cupom / Checkout ---------- */
+.secao-cupom {
+  background: var(--cor-fundo-card);
+  border-radius: var(--borda-raio);
+  box-shadow: var(--sombra-suave);
+  padding: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Quando o cupom estiver DENTRO da sidebar, remove sombra/bg duplicados */
+.sidebar .secao-cupom {
+  background: transparent;
+  box-shadow: none;
+  padding: 1rem 0 0;
+  margin-top: 0.75rem;
+  border-top: 2px solid var(--cor-borda);
+  border-radius: 0;
+}
+
+.secao-cupom__titulo {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.secao-cupom__titulo::before {
+  content: '🏷️';
+}
+
+.secao-cupom__form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Dentro da sidebar o form empilha verticalmente */
+.sidebar .secao-cupom__form {
+  flex-direction: column;
+}
+
+.sidebar .secao-cupom__form .btn {
+  width: 100%;
+}
+
+.input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--borda-raio-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--cor-texto);
+  transition: var(--transicao);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
+}
+
+.input::placeholder {
+  color: #b2bec3;
+}
+
+.mensagem-cupom {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--borda-raio-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  min-height: 1rem;
+}
+
+/* ---------- Classes Utilitárias para JS ---------- */
+.frete-gratis {
+  color: var(--cor-sucesso) !important;
+  font-weight: 600;
+}
+
+.frete-gratis::before {
+  content: '✅ ';
+}
+
+.texto-sucesso {
+  color: var(--cor-sucesso);
+  background: rgba(0, 184, 148, 0.08);
+  border: 1px solid rgba(0, 184, 148, 0.2);
+}
+
+.texto-erro {
+  color: var(--cor-perigo);
+  background: rgba(214, 48, 49, 0.08);
+  border: 1px solid rgba(214, 48, 49, 0.2);
+}
+
+.escondido {
+  display: none !important;
+}
+
+.visivel {
+  display: block !important;
+}
+
+.destaque {
+  animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.shake {
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-5px); }
+  75%      { transform: translateX(5px); }
+}
+
+/* ---------- Footer / Rodapé ---------- */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--cor-texto-claro);
+  font-size: 0.8rem;
+  margin-top: 2rem;
+}
+
+.footer a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+}
+
+/* ---------- Banner do tema atual ---------- */
+.banner-tema {
+  background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+  color: #fff;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--borda-raio);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.banner-tema__icone {
+  font-size: 2rem;
+}
+
+.banner-tema__texto h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.banner-tema__texto p {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  margin-top: 0.15rem;
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 900px) {
+  .layout--com-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0 1rem;
+    height: 60px;
+  }
+
+  .header__titulo {
+    font-size: 1.15rem;
+  }
+
+  .layout {
+    padding: 0 1rem;
+    margin: 1rem auto;
+  }
+
+  .vitrine {
+    grid-template-columns: 1fr;
+  }
+
+  .secao-cupom__form {
+    flex-direction: column;
+  }
+}
