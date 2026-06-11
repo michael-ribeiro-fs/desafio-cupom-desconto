@@ -44,7 +44,9 @@ const carrinhoVazio = document.querySelector("#carrinho-vazio");
 const listaItensDOM = document.querySelector("#lista-itens-carrinho");
 const resumoValores = document.querySelector("#resumo-valores");
 const sidebarTotal = document.querySelector("#sidebar-total");
-const elementoTotalCarrinho = document.querySelector("#total-carrinho-contador");
+const elementoTotalCarrinho = document.querySelector(
+  "#total-carrinho-contador",
+);
 
 // --- Funções de Renderização ---
 function renderizarCarrinho() {
@@ -57,9 +59,10 @@ function renderizarCarrinho() {
     }
   }
 
-  if (badgeContador) badgeContador.innerText = listaCarrinho.length;
-  if (elementoTotalCarrinho) elementoTotalCarrinho.innerText = totalCarrinho.toFixed(2);
-  if (sidebarTotal) sidebarTotal.innerText = `R$ ${totalCarrinho.toFixed(2)}`;
+  if (badgeContador) badgeContador.innerText = listaCarrinho.length; // Contador de produto no carrinho
+  if (elementoTotalCarrinho)
+    elementoTotalCarrinho.innerText = totalCarrinho.toFixed(2); //Total para o Carrinho "Total da compra"
+  if (sidebarTotal) sidebarTotal.innerText = `R$ ${totalCarrinho.toFixed(2)}`; //Inserir o desconto aqui
 
   if (listaCarrinho.length > 0) {
     if (carrinhoVazio) carrinhoVazio.classList.add("escondido");
@@ -71,6 +74,25 @@ function renderizarCarrinho() {
     if (resumoValores) resumoValores.classList.add("escondido");
   }
 }
+
+function aplicarDesconto() {
+  const btnDesconto = document.querySelector("#btn-cupom");
+  const inputCupom = document.querySelector("#input-cupom");
+
+  btnDesconto.addEventListener("click", () => {
+    if (inputCupom.value === "SOUDEVSENIOR") {
+      totalCarrinho = totalCarrinho * 0.9;
+      sidebarTotal.innerText = `R$ ${totalCarrinho.toFixed(2)}`;
+      elementoTotalCarrinho.innerText = `R$ ${totalCarrinho.toFixed(2)}`;
+
+      btnDesconto.disabled = true;
+    } else {
+      alert("Cupom inválido");
+    }
+  });
+}
+
+aplicarDesconto();
 
 function carregarProdutos() {
   const template = document.querySelector("#template-card");
@@ -87,7 +109,8 @@ function carregarProdutos() {
     const clone = template.content.cloneNode(true);
 
     clone.querySelector(".card__nome").innerText = prod.nome;
-    clone.querySelector(".card__preco").innerText = `R$ ${prod.preco.toFixed(2)}`;
+    clone.querySelector(".card__preco").innerText =
+      `R$ ${prod.preco.toFixed(2)}`;
     clone.querySelector(".card__imagem").innerText = prod.emoji;
 
     const freteElemento = clone.querySelector(".card__frete");
@@ -126,45 +149,3 @@ function carregarProdutos() {
 // Inicializa a página
 carregarProdutos();
 renderizarCarrinho();
-
-// =============================================================
-//
-// 🏆🏆🏆  SEU DESAFIO COMEÇA AQUI!  🏆🏆🏆
-//
-// =============================================================
-
-// -------------------------------------------------------------
-// 📌 PASSO 1 — Capturar os elementos do DOM
-// -------------------------------------------------------------
-
-// -------------------------------------------------------------
-// 📌 PASSO 2 — Adicionar um evento de clique ao botão
-// -------------------------------------------------------------
-
-// -----------------------------------------------------------
-// 📌 PASSO 3 — Validar o cupom com condicional
-// -----------------------------------------------------------
-
-// -----------------------------------------------------------
-// 📌 PASSO 4 — Tratar cupom inválido ou vazio
-// -----------------------------------------------------------
-
-// -------------------------------------------------------------
-// 🌟 PASSO 5 — AVANÇADO
-// -------------------------------------------------------------
-// Após o cupom ser aplicado com sucesso, DESABILITE o botão
-// para evitar que o desconto seja aplicado mais de uma vez.
-
-
-// =============================================================
-// 🎉 FIM DO DESAFIO!
-//
-// Após completar, abra este arquivo no navegador e teste:
-//   1. Adicione produtos ao carrinho
-//   2. Digite "SOUDEVSENIOR" no campo de cupom
-//   3. Clique em "Aplicar Cupom"
-//   4. Veja o desconto sendo aplicado na tela!
-//
-// 💡 Se travar, volte aos temas anteriores e revise os
-//    conceitos. Cada passo usa algo que já aprendemos!
-// =============================================================
