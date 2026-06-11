@@ -1,5 +1,15 @@
 # 🏆 Desafio: Validador de Cupom de Desconto
 
+## 🚀 Demonstração
+
+Acesse o projeto online:
+
+🔗 https://michael-ribeiro-fs.github.io/desafio-cupom-desconto/
+
+---
+
+## 📖 Sobre o Projeto
+
 O objetivo deste desafio é implementar a funcionalidade de validação e aplicação de cupom de desconto em um sistema de checkout de e-commerce, utilizando conceitos fundamentais de JavaScript e manipulação do DOM.
 
 ## Etapas do Desafio

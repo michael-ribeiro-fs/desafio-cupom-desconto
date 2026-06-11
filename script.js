@@ -59,10 +59,10 @@ function renderizarCarrinho() {
     }
   }
 
-  if (badgeContador) badgeContador.innerText = listaCarrinho.length; // Contador de produto no carrinho
+  if (badgeContador) badgeContador.innerText = listaCarrinho.length;
   if (elementoTotalCarrinho)
-    elementoTotalCarrinho.innerText = totalCarrinho.toFixed(2); //Total para o Carrinho "Total da compra"
-  if (sidebarTotal) sidebarTotal.innerText = `R$ ${totalCarrinho.toFixed(2)}`; //Inserir o desconto aqui
+    elementoTotalCarrinho.innerText = totalCarrinho.toFixed(2);
+  if (sidebarTotal) sidebarTotal.innerText = `R$ ${totalCarrinho.toFixed(2)}`;
 
   if (listaCarrinho.length > 0) {
     if (carrinhoVazio) carrinhoVazio.classList.add("escondido");
@@ -89,6 +89,8 @@ function aplicarDesconto() {
     } else {
       alert("Cupom inválido");
     }
+
+    inputCupom.value = "";
   });
 }
 
