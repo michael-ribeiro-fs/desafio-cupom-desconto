@@ -78,6 +78,7 @@ function renderizarCarrinho() {
 function aplicarDesconto() {
   const btnDesconto = document.querySelector("#btn-cupom");
   const inputCupom = document.querySelector("#input-cupom");
+  const mensagemErro = document.querySelector("#mensagem-cupom");
 
   btnDesconto.addEventListener("click", () => {
     if (inputCupom.value === "SOUDEVSENIOR") {
@@ -85,12 +86,16 @@ function aplicarDesconto() {
       sidebarTotal.innerText = `R$ ${totalCarrinho.toFixed(2)}`;
       elementoTotalCarrinho.innerText = `R$ ${totalCarrinho.toFixed(2)}`;
 
+      mensagemErro.style.color = "green";
+      mensagemErro.textContent = `Cupom aplicado com sucesso! Sua compra agora fica R$ ${totalCarrinho.toFixed(2)} `;
+
+      inputCupom.value = "";
+
       btnDesconto.disabled = true;
     } else {
-      alert("Cupom inválido");
+      mensagemErro.style.color = "red";
+      mensagemErro.textContent = "Cupom Inválido";
     }
-
-    inputCupom.value = "";
   });
 }
 
